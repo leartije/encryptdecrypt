@@ -5,20 +5,21 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        String msg = "we found a treasure!";
 
+        Scanner scanner = new Scanner(System.in);
+        String msg = scanner.nextLine();
+        int a = scanner.nextInt() % 25;
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < msg.length(); i++) {
             char current = msg.charAt(i);
             if (Character.isLetter(current)) {
                 if (Character.isUpperCase(current)) {
-                    int n = 90 - ((current + 25) % 90);
+                    int n = current + a <= 90 ? current + a : (current + a) - 90 + 64;
                     sb.append((char) n);
                 }
                 if (Character.isLowerCase(current)) {
-                    int m = 122 - ((current + 25) % 122);
+                    int m = current + a <= 122 ? current + a : (current + a) - 122 + 96;
                     sb.append((char) m);
                 }
 
