@@ -1,34 +1,31 @@
 package encryptdecrypt;
 
-import java.util.Scanner;
-
 public class Main {
+
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        String msg = "we found a treasure!";
+        String s = "enc";
+        String msg = "";
+        int n = 0;
 
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < msg.length(); i++) {
-            char current = msg.charAt(i);
-            if (Character.isLetter(current)) {
-                if (Character.isUpperCase(current)) {
-                    int n = 90 - ((current + 25) % 90);
-                    sb.append((char) n);
-                }
-                if (Character.isLowerCase(current)) {
-                    int m = 122 - ((current + 25) % 122);
-                    sb.append((char) m);
-                }
-
-            } else {
-                sb.append(current);
+        for (int i = 0; i < args.length; i++) {
+            if ("-mode".equals(args[i])) {
+                s = args[i + 1];
             }
-
+            if ("-key".equals(args[i])) {
+                n = Integer.parseInt(args[i + 1]);
+            }
+            if ("-data".equals(args[i])) {
+                msg = args[i + 1];
+            }
         }
 
-        System.out.println(sb);
 
+        if ("enc".equalsIgnoreCase(s)) {
+            System.out.println(new Encryption().execute(msg, n));
+        } else {
+            System.out.println(new Decryption().execute(msg, n));
+        }
     }
+
 }
