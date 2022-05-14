@@ -44,10 +44,6 @@ public class ParseCL {
         return data;
     }
 
-    public File getIn() {
-        return in;
-    }
-
     public File getOut() {
         return out;
     }

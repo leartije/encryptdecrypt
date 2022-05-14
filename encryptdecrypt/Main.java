@@ -3,9 +3,7 @@ package encryptdecrypt;
 import encryptdecrypt.IOfiles.WriteFile;
 
 public class Main {
-
     public static void main(String[] args) {
-
 
         ParseCL parseCL = new ParseCL();
         parseCL.parse(args);
@@ -26,5 +24,4 @@ public class Main {
             }
         }
     }
-
 }
