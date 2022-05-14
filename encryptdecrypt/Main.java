@@ -1,30 +1,29 @@
 package encryptdecrypt;
 
+import encryptdecrypt.IOfiles.WriteFile;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        String s = "enc";
-        String msg = "";
-        int n = 0;
 
-        for (int i = 0; i < args.length; i++) {
-            if ("-mode".equals(args[i])) {
-                s = args[i + 1];
-            }
-            if ("-key".equals(args[i])) {
-                n = Integer.parseInt(args[i + 1]);
-            }
-            if ("-data".equals(args[i])) {
-                msg = args[i + 1];
-            }
-        }
+        ParseCL parseCL = new ParseCL();
+        parseCL.parse(args);
 
-
-        if ("enc".equalsIgnoreCase(s)) {
-            System.out.println(new Encryption().execute(msg, n));
+        if ("data".equals(parseCL.getData())) {
+            if ("enc".equalsIgnoreCase(parseCL.getMode())) {
+                System.out.println(new Encryption().execute(parseCL.getData(), parseCL.getKey()));
+            } else {
+                System.out.println(new Decryption().execute(parseCL.getData(), parseCL.getKey()));
+            }
         } else {
-            System.out.println(new Decryption().execute(msg, n));
+            if ("enc".equalsIgnoreCase(parseCL.getMode())) {
+                String enc = new Encryption().execute(parseCL.getData(), parseCL.getKey());
+                WriteFile.writeToFile(parseCL.getOut(), enc);
+            } else {
+                String dec = new Decryption().execute(parseCL.getData(), parseCL.getKey());
+                WriteFile.writeToFile(parseCL.getOut(), dec);
+            }
         }
     }
 
